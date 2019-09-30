@@ -3,7 +3,7 @@ import os
 import copy
 import time
 def menu():
-    with open ("/home/bendi/Documents/Python/Sudoku/picture.txt","r") as menu_picture:
+    with open ("picture.txt", "r") as menu_picture:
         print(f"\u001b[1m{menu_picture.read()}\u001b[0m")
         try:
             menu_coice = input("Choose your option: ")
