@@ -16,34 +16,37 @@ def fillTable ( table, num):
         integer = random.randint(1,9)
         row = random.randint(0,8)
         column = random.randint(0,8)
-        while not(isNumberValidInColumn(table,row,column,integer) and isNumberValidInRow(table,row,column,integer) and isNumberValidInBlock(table,row,column,integer)):
+        while not(isNumberValidInColumn(table,row,column,integer,False) and isNumberValidInRow(table,row,column,integer,False) and isNumberValidInBlock(table,row,column,integer)):
             integer = random.randint(1,9)
             row = random.randint(0,8)
             column = random.randint(0,8)            
         table[row][column] = integer
     return table
 
-def isNumberValidInColumn(table,row,column,number):
+def isNumberValidInColumn(table,row,column,number,*wincheck):
     valid = True
-    for r in table:
+    for r in range(9):
         if not r == row:
-            r[column] = str(r[column])
-            if not r[column] == " ":
-                if int(r[column]) == number:
+            if not table[r][column] == " ":
+                if table[r][column] == number:
                     valid = False
         else:
-            if str.isnumeric(r[column]):
-                valid = False
+            if not wincheck:
+                if not table[r][column] == " ":
+                    valid = False
     return valid
 
-def isNumberValidInRow(table,row,column,number):
+def isNumberValidInRow(table,row,column,number,*wincheck):
     valid = True
-    for num in table[row]:
-        if not num == " ":
-            if int(num) == number:
-                valid = False
-            if num == column:
-                valid = False
+    for c in range (9):
+        if not c == column:
+            if not table[row][c] == " ":
+                if table[row][c] == table[row][column]:
+                    valid = False
+        else:
+            if not wincheck:
+                if not table[row][column] == " ":
+                    valid = False
     return valid
 
 def isNumberValidInBlock(table,row,column,number):
