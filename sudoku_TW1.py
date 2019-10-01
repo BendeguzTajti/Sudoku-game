@@ -12,7 +12,7 @@ def menu():
         try:
             menu_coice = input("Choose your option: ")
             if menu_coice.lower() == "s":
-                choose_difficulty()
+                pass
             elif menu_coice.lower() == "q":
                 clear()
                 with open("exit_picture.txt", "r") as exit_picture:
@@ -49,9 +49,9 @@ def loading():
         sys.stdout.write(u"\u001b[1000D" + str(i + 1) + "%")
         sys.stdout.flush()
 
-def board_nums():
+def board_nums(num):
     
-    ghost_list = ghostlist.createRandomTable(5)
+    ghost_list = ghostlist.createRandomTable(num)
     nums = copy.deepcopy(ghost_list)
     return nums, ghost_list
 
@@ -117,7 +117,7 @@ def main():
     menu()
     clear()
     fixed_nums = choose_difficulty()
-    nums, ghost_list = board_nums()
+    nums, ghost_list = board_nums(fixed_nums)
     check_sudoku(nums)
     clear()
     loading()

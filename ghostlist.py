@@ -39,9 +39,9 @@ def isNumberValidInColumn(table,row,column,number,*wincheck):
 def isNumberValidInRow(table,row,column,number,*wincheck):
     valid = True
     for c in range (9):
-        if not c == column:
-            if not table[row][c] == " ":
-                if table[row][c] == table[row][column]:
+        if not (c == column):
+            if not (table[row][c] == " "):
+                if table[row][c] == number:
                     valid = False
         else:
             if not wincheck:
