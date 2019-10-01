@@ -2,7 +2,8 @@ import sys
 import os
 import copy
 import time
-
+import ghostlist
+import gamedraw
 
 def menu():
     with open("picture.txt", "r") as menu_picture:
@@ -32,20 +33,9 @@ def loading():
 
 
 def board_nums():
-    ghost_list = [
-        [9, " ", 7, " ", " ", 2, " ", 5, " "],
-        [5, " ", " ", " ", 9, 8, 7, 1, 2],
-        [" ", 2, " ", 7, " ", " ", " ", 9, 3],
-        [" ", 6, 8, " ", 7, " ", " ", " ", " "],
-        [" ", " ", " ", 8, " ", 3, " ", " ", " "],
-        [" ", " ", " ", " ", 4, " ", 2, 6, " "],
-        [8, 1, " ", " ", " ", 7, " ", 3, " "],
-        [6, 9, 2, 5, 3, " ", " ", " ", 7],
-        [" ", 7, " ", 1, " ", " ", 6, " ", 4]
-    ]
+    ghost_list = ghostlist.createRandomTable(5)
     nums = copy.deepcopy(ghost_list)
     return nums, ghost_list
-
 
 def board_creation(nums):
     red = "\u001b[31m"
@@ -141,12 +131,14 @@ def main():
     check_sudoku(nums)
     loading()
     clear()
-    board_creation(nums)
+    gamedraw.drawTable(nums,ghost_list)
+    #board_creation(nums)
     while check_sudoku(nums) is False:
         x_range, y_range = locate_num(nums, ghost_list)
         append_or_delete(x_range, y_range, nums)
         clear()
-        board_creation(nums)
+        #board_creation(nums)
+        gamedraw.drawTable(nums,ghost_list)
         check_sudoku(nums)
     sys.exit()
 

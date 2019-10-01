@@ -74,8 +74,6 @@ def getAllIndexOfBlock(row,column):
         #allIndex.append(subTable)      
     return allIndex
 
-tabla = createRandomTable(5)
-board_creation(tabla) 
 
 
 
