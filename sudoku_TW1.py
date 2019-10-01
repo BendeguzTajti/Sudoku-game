@@ -12,7 +12,10 @@ def menu():
             if menu_coice.lower() == "s":
                 pass
             elif menu_coice.lower() == "q":
-                sys.exit()
+                clear()
+                with open("exit_picture.txt", "r") as exit_picture:
+                    print(f"\u001b[1m{exit_picture.read()}\u001b[0m")
+                    sys.exit()
             else:
                 raise TypeError
         except TypeError:
