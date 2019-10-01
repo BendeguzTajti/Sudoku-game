@@ -104,13 +104,11 @@ def locate_num(nums, ghost_list):
 
 
 def append_or_delete(x_range, y_range, nums):
-    print(f"\n(a) Append\n(d) Delete\n")
-    choice = input(f"Choose an option: ")
     try:
-        if choice.lower() == "a":
+        if nums[x_range - 1][y_range - 1] == " ":
             your_num = int(input("Enter a number: "))
             nums[x_range - 1][y_range - 1] = your_num
-        elif choice.lower() == "d":
+        elif nums[x_range - 1][y_range - 1] != " ":
             nums[x_range - 1][y_range - 1] = " "
         else:
             raise ValueError
