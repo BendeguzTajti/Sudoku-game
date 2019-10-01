@@ -5,7 +5,7 @@ def drawTable(table,ghosttable):
     reset_color = "\u001b[0m"
     print ( f"     1   2   3   4   5   6   7   8   9 \n" + reset_color + black+ "   " + background_white + "╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗" + reset_color) 
     for row in range(9):
-        line = str(row) + "  "+ background_white + black + "║"
+        line = str(row + 1) + "  "+ background_white + black + "║"
         for column in range(9):
             if (table[row][column] == ghosttable[row][column]) and (not table[row][column] == " "):
                 if (column + 1)%3 == 0:
