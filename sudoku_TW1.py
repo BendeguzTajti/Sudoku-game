@@ -49,6 +49,7 @@ def loading():
     reset = "\u001b[0m"
     with open("coke_ad.txt", "r") as ad:
         print(f"\n\n{red_background}{bold}{ad.read()}{reset}")
+    print(f"{bold}* Buy the full game to remove ads\n\n\n{reset}")
     print(f"{bold}Creating sudoku...{reset}".center(75))
     bar_lenght = 0
     fill = ""
