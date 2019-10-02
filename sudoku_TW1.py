@@ -27,7 +27,7 @@ def menu():
 
 def choose_difficulty():
     try:
-        print("1) Easy\n2) Medium\n3) Hard")
+        print("1) Easy\n2) Medium,\n3) Hard")
         difficulty = input("Choose a difficulty: ")
         if difficulty == "1":
             return 30
@@ -44,13 +44,23 @@ def choose_difficulty():
 
 def loading():
     print("Creating sudoku...")
-    for i in range(0, 100):
-        time.sleep(0.03)
-        sys.stdout.write(u"\u001b[1000D" + str(i + 1) + "%")
+    bar_lenght = 0
+    fill = ""
+    print("\r")
+    percent = 0
+    for bar_lenght in range(0, 26):
+        width = 25 - len(fill)
+        width = " " * width
+        bar = "|" + fill + width + "|" + str(percent) + "%"
+        fill += "█"
+        percent += 4
+        time.sleep(0.3)
+        bar_lenght += 1
+        sys.stdout.write(u"\u001b[1000D" + bar)
         sys.stdout.flush()
 
+
 def board_nums(num):
-    
     ghost_list = ghostlist.createRandomTable(num)
     nums = copy.deepcopy(ghost_list)
     return nums, ghost_list
@@ -74,6 +84,7 @@ def locate_num(nums, ghost_list):
         return locate_num(nums, ghost_list)
     return x_range, y_range
 
+
 def append_or_delete(x_range, y_range, nums):
     try:
         if nums[x_range - 1][y_range - 1] == " ":
@@ -87,8 +98,10 @@ def append_or_delete(x_range, y_range, nums):
         print("Invalid option!")
         return append_or_delete(x_range, y_range, nums)
 
+
 def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
+
 
 def check_sudoku(nums):
     count = 0
@@ -98,6 +111,7 @@ def check_sudoku(nums):
         return True
     else:
         return False
+
 
 def winCheck(table):
     win = False
@@ -111,6 +125,7 @@ def winCheck(table):
                 if not ghostlist.isNumberValidInBlock(table,row,column,table[row][column]):
                     win = False
     return win
+
 
 def main():
     clear()
