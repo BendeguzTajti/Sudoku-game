@@ -43,6 +43,7 @@ def choose_difficulty():
 
 
 def loading():
+    os.system("setterm -cursor off")
     red_background = "\u001b[41m"
     bold = "\u001b[1m"
     reset = "\u001b[0m"
@@ -64,7 +65,7 @@ def loading():
         sys.stdout.write(u"\u001b[1000D" + bar.center(80))
         sys.stdout.flush()
     time.sleep(0.5)
-
+    os.system("setterm -cursor on")
 
 def board_nums(num):
     ghost_list = ghostlist.createRandomTable(num)
