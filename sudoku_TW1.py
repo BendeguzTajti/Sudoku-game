@@ -43,7 +43,12 @@ def choose_difficulty():
 
 
 def loading():
-    print("Creating sudoku...")
+    red_background = "\u001b[41m"
+    bold = "\u001b[1m"
+    reset = "\u001b[0m"
+    with open("coke_ad.txt", "r") as ad:
+        print(f"\n\n{red_background}{bold}{ad.read()}{reset}")
+    print(f"{bold}Creating sudoku...{reset}".center(75))
     bar_lenght = 0
     fill = ""
     print("\r")
@@ -51,13 +56,14 @@ def loading():
     for bar_lenght in range(0, 26):
         width = 25 - len(fill)
         width = " " * width
-        bar = "|" + fill + width + "|" + str(percent) + "%"
+        bar = (f"{bold}|{fill + width}|  {str(percent)}%{reset}").center(80)
         fill += "█"
         percent += 4
         time.sleep(0.3)
         bar_lenght += 1
-        sys.stdout.write(u"\u001b[1000D" + bar)
+        sys.stdout.write(u"\u001b[1000D" + bar.center(80))
         sys.stdout.flush()
+    time.sleep(0.5)
 
 
 def board_nums(num):
