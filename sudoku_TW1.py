@@ -18,23 +18,34 @@ def menu():
                 with open("exit_picture.txt", "r") as exit_picture:
                     print(f"\u001b[1m{exit_picture.read()}\u001b[0m")
                     sys.exit()
+            elif menu_coice.lower() == "b":
+                clear()
+                return menu()
             else:
                 raise TypeError
         except TypeError:
             print("Invalid option!")
+            time.sleep(1)
+            clear()
             return menu()
 
 
 def choose_difficulty():
+    bold = "\u001b[1m"
+    reset = "\u001b[0m"
     try:
-        print("1) Easy\n2) Medium,\n3) Hard")
+        with open("choose_difficulty.txt", "r") as choose_diff:
+            print(f"{bold}{choose_diff.read()}{reset}")
         difficulty = input("Choose a difficulty: ")
         if difficulty == "1":
-            return 30
+            return 50
         elif difficulty == "2":
-            return 20
+            return 30
         elif difficulty == "3":
-            return 10
+            return 20
+        elif difficulty == "4":
+            clear()
+            return choose_difficulty()
         else:
             raise ValueError
     except ValueError:
@@ -67,6 +78,7 @@ def loading():
         sys.stdout.flush()
     time.sleep(0.5)
     os.system("setterm -cursor on")
+
 
 def board_nums(num):
     ghost_list = ghostlist.createRandomTable(num)

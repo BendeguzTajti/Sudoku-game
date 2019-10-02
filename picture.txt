@@ -15,7 +15,8 @@
 
 								(q) Quit game
 
+								(b) Buy the full version
 
 
-
+								
 								
