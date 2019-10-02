@@ -31,9 +31,9 @@ def isNumberValidInColumn(table,row,column,number,*wincheck):
                 if table[r][column] == number:
                     valid = False
         else:
-            if not wincheck:
-                if not table[r][column] == " ":
-                    valid = False
+            #if not wincheck:
+            if not table[r][column] == " ":
+                valid = False
     return valid
 
 def isNumberValidInRow(table,row,column,number,*wincheck):
@@ -44,9 +44,9 @@ def isNumberValidInRow(table,row,column,number,*wincheck):
                 if table[row][c] == number:
                     valid = False
         else:
-            if not wincheck:
-                if not table[row][column] == " ":
-                    valid = False
+            #if not wincheck:
+            if not table[row][column] == " ":
+                valid = False
     return valid
 
 def isNumberValidInBlock(table,row,column,number):
