@@ -63,7 +63,7 @@ def loading():
     with open("coke_ad.txt", "r") as ad:
         print(f"\n\n{red_background}{bold}{ad.read()}{reset}")
     print(f"{bold}* Buy the full game to remove ads\n\n\n{reset}")
-    print(f"{bold}Creating sudoku...{reset}".center(75))
+    print(f"{bold}Creating sudoku...{reset}".center(80))
     bar_lenght = 0
     fill = ""
     print("\r")
@@ -71,12 +71,12 @@ def loading():
     for bar_lenght in range(0, 26):
         width = 25 - len(fill)
         width = " " * width
-        bar = (f"{bold}|{fill + width}|  {str(percent)}%{reset}").center(80)
+        bar = (f"{bold}|{fill + width}| ").center(75)
         fill += "█"
         percent += 4
         time.sleep(0.3)
         bar_lenght += 1
-        sys.stdout.write(u"\u001b[1000D" + bar.center(80))
+        sys.stdout.write(u"\u001b[1000D" + bar.center(75))
         sys.stdout.flush()
     time.sleep(0.5)
     os.system("setterm -cursor on")
@@ -90,13 +90,15 @@ def board_nums(num):
 
 def locate_num(nums, ghost_list):
     try:
-        x_range = int(input("\nEnter a line number: "))
-        if x_range > len(nums) or x_range < 1:
+        x = int(input("\nEnter a line number( exit = 0 ): "))
+        if x == 0:
+            sys.exit()
+        elif x > len(nums) or x < 1:
             raise ValueError
-        y_range = int(input("Enter a collumn number: "))
-        if y_range > len(nums) or y_range < 1:
+        y = int(input("Enter a collumn number: "))
+        if y > len(nums) or y < 1:
             raise ValueError
-        if isinstance(ghost_list[x_range - 1][y_range - 1], int):
+        if isinstance(ghost_list[x - 1][y - 1], int):
             raise TypeError
     except ValueError:
         print("Your number must be between 0-10!")
@@ -104,21 +106,21 @@ def locate_num(nums, ghost_list):
     except TypeError:
         print("The number in this block cannot be changed!")
         return locate_num(nums, ghost_list)
-    return x_range, y_range
+    return x, y
 
 
-def append_or_delete(x_range, y_range, nums):
+def append_or_delete(x, y, nums):
     try:
-        if nums[x_range - 1][y_range - 1] == " ":
+        if nums[x - 1][y - 1] == " ":
             your_num = int(input("Enter a number: "))
-            nums[x_range - 1][y_range - 1] = your_num
-        elif nums[x_range - 1][y_range - 1] != " ":
-            nums[x_range - 1][y_range - 1] = " "
+            nums[x - 1][y - 1] = your_num
+        elif nums[x - 1][y - 1] != " ":
+            nums[x - 1][y - 1] = " "
         else:
             raise ValueError
     except ValueError:
         print("Invalid option!")
-        return append_or_delete(x_range, y_range, nums)
+        return append_or_delete(x, y, nums)
 
 
 def clear():
@@ -161,8 +163,8 @@ def main():
     clear()
     gamedraw.drawTable(nums,ghost_list)
     while not winCheck(nums):
-        x_range, y_range = locate_num(nums, ghost_list)
-        append_or_delete(x_range, y_range, nums)
+        x, y = locate_num(nums, ghost_list)
+        append_or_delete(x, y, nums)
         clear()
         gamedraw.drawTable(nums,ghost_list)
         check_sudoku(nums)
