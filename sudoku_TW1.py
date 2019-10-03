@@ -38,11 +38,11 @@ def choose_difficulty():
             print(f"{bold}{choose_diff.read()}{reset}")
         difficulty = input("Choose a difficulty: ")
         if difficulty == "1":
-            return 50
+            return 38
         elif difficulty == "2":
             return 30
         elif difficulty == "3":
-            return 20
+            return 25
         elif difficulty == "4":
             clear()
             return choose_difficulty()
@@ -50,6 +50,8 @@ def choose_difficulty():
             raise ValueError
     except ValueError:
         print("Invalid number!")
+        time.sleep(1)
+        clear()
         return choose_difficulty()
 
 
